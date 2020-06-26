@@ -1,6 +1,17 @@
 version: '2'
 
 services:
+  phonebook-nginx:
+    container_name: phonebook-nginx
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    restart: always
+    depends_on:
+      - phonebook-app
+    ports:
+      - "80:80"
+
   phonebook-mysql:
     container_name: phonebook-mysql
     build:
@@ -15,6 +26,6 @@ services:
       dockerfile: Dockerfile-app
     depends_on:
       - phonebook-mysql
-    ports:
-      - "8181:8181"
+#    ports:
+#      - "8181:8181"
     restart: always
